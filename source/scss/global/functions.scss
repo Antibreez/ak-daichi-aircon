@@ -1,0 +1,11 @@
+@function vw($value) {
+  @return calc($value / 16 * 1rem);
+}
+
+@function vtab($value, $base: 1440) {
+  @return calc($value / $base * 100vw);
+}
+
+@function vmob($value, $base: 320) {
+  @return calc($value / $base * 100vmin);
+}

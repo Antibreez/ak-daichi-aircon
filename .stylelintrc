@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard-scss",
+
+  "rules": {
+    "declaration-no-important": true,
+    "indentation": [2, {"ignore": ["inside-parens"]}],
+    "scss/at-import-partial-extension": "never"
+  }
+}
