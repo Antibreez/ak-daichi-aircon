@@ -5,6 +5,7 @@ const $warrantyCode = $warrantyCodeForm.find('#warranty-code')
 const $purchaseDate = $warrantyCodeForm.find('#purchase-date')
 const $warrantyEmail = $warrantyCodeForm.find('#email')
 const $warrantyCity = $warrantyCodeForm.find('#city')
+const $warrantyCodeNote = $warrantyCodeForm.find('.code-registration__note')
 const $warrantyCodeSubmit = $warrantyCodeForm.find('button[type="submit"]')
 
 const warrantyCodeStage = $warrantyCode.length ? 1 : $warrantyEmail.length ? 2 : 3
@@ -13,6 +14,15 @@ let hasPurchaseDateError = false
 let hasWarrantyCodeError = false
 let hasWarrantyEmailError = false
 let hasWarrantyCityError = false
+
+const warrantyCodeMask = $warrantyCode.attr('placeholder')
+  ? $warrantyCode.attr('placeholder').replace(/_/g, 9)
+  : '99999-99999-99999'
+
+$warrantyCode.inputmask({
+  mask: warrantyCodeMask,
+  showMaskOnHover: false,
+})
 
 const isPurchaseDateValid = () => {
   console.log('###date', Date.parse($purchaseDate.val()))
@@ -30,7 +40,7 @@ const isWarrantyCodeValid = () => {
     return $warrantyCode.val().trim() && new RegExp($warrantyCode.attr('pattern')).test($warrantyCode.val())
   }
 
-  return $warrantyCode.val().trim()
+  return $warrantyCode.val().trim() && !$warrantyCode.val().includes('_')
 }
 
 const isWarrantyEmailValid = () => {
@@ -197,5 +207,37 @@ $warrantyCodeSubmit.on('click', function (e) {
     }
   }
 })
+
+$warrantyCodeNote.on('click', function () {
+  if (!$(this).hasClass('is--opened')) {
+    $(this).addClass('is--opened')
+
+    const $popup = $warrantyCodeNote.find('.code-registration__code-popup').clone()
+    $popup.addClass('code-registration__code-popup--outer')
+
+    $('body').append($popup)
+    $popup.addClass('is--visible')
+  } else {
+    $(this).removeClass('is--opened')
+
+    $('.code-registration__code-popup--outer').remove()
+  }
+})
+
+const onWarrantyCodePopupClose = () => {
+  $warrantyCodeNote.removeClass('is--opened')
+  $('.code-registration__code-popup--outer').remove()
+}
+
+$(document).on(
+  'click',
+  '.code-registration__code-popup--outer .code-registration__code-popup-bg',
+  onWarrantyCodePopupClose
+)
+$(document).on(
+  'click',
+  '.code-registration__code-popup--outer .code-registration__code-popup-close',
+  onWarrantyCodePopupClose
+)
 
 //# sourceMappingURL=main.js.map

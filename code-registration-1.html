@@ -415,10 +415,20 @@
                   <div class="input">
                     <div class="input__label">Гарантийный код устройства</div>
                     <div class="input__field">
-                      <input id="warranty-code" type="text" name="firstname" placeholder="Укажите серийный номер"
+                      <input id="warranty-code" type="text" name="firstname" placeholder="_____-_____-_____"
                         autocomplete="off">
                       <p class="input_error">Укажите корректный гарантийный код</p>
-                      <button type="button" class="input_note">Как найти код устройства?</button>
+                      <button type="button" class="code-registration__note input_note">
+                        Как найти код устройства?
+                        <div class="code-registration__code-popup">
+                          <div class="code-registration__code-popup-bg"></div>
+                          <div class="code-registration__code-popup-inner">
+                            Ищите код гарантии на корпусе внутреннего
+                            блока кондиционера
+                            <div class="code-registration__code-popup-close" role="button"></div>
+                          </div>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
