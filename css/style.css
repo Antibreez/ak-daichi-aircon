@@ -2952,6 +2952,22 @@ a.ui-button:active,
   background-size: contain;
   z-index: 2;
 }
+@media (max-width: 1439px) {
+  .code-registration__form .input_date::before {
+    top: 2.9861111111vw;
+    width: 1.6666666667vw;
+    height: 1.6666666667vw;
+    right: 1.3888888889vw;
+  }
+}
+@media (max-width: 1023px) {
+  .code-registration__form .input_date::before {
+    top: 13.4375vmin;
+    width: 7.5vmin;
+    height: 7.5vmin;
+    right: 6.25vmin;
+  }
+}
 .code-registration__form .input .input_error {
   display: none;
   font-size: 12px;
@@ -3464,6 +3480,17 @@ a.ui-button:active,
   }
   .page-title.is--for-desktop {
     display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__menu ul + ul {
+    margin-left: 5vmin;
+  }
+}
+@media (min-width: 1440px) {
+  .footer__menu ul + ul {
+    margin-left: 40px;
   }
 }
 
