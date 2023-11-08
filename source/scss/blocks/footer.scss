@@ -1,0 +1,9 @@
+.footer__menu ul + ul {
+  @media (min-width: 1024px) {
+    margin-left: vmob(16);
+  }
+
+  @media (min-width: 1440px) {
+    margin-left: 40px;
+  }
+}

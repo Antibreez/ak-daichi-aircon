@@ -25,7 +25,7 @@ export const vendor = () => {
       './node_modules/select2/dist/js/select2.js',
       // './node_modules/smooth-scrollbar/dist/smooth-scrollbar.js',
       // './node_modules/validator.tool/dist/validator.js',
-      // './node_modules/inputmask/dist/jquery.inputmask.js',
+      './node_modules/inputmask/dist/jquery.inputmask.js',
       // './node_modules/smoothscroll-for-websites/SmoothScroll.js',
       // './source/js/libs/page-smooth-scroll.js',
       // './node_modules/gsap/dist/gsap.js',

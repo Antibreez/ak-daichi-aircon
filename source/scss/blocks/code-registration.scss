@@ -131,6 +131,20 @@
         background-size: contain;
         z-index: 2;
 
+        @include tablet {
+          top: vtab(43);
+          width: vtab(24);
+          height: vtab(24);
+          right: vtab(20);
+        }
+
+        @include mobile {
+          top: vmob(43);
+          width: vmob(24);
+          height: vmob(24);
+          right: vmob(20);
+        }
+
         // @include tablet {
         //   top: vtab(43);
         //   right: vtab(20);
@@ -582,6 +596,121 @@
       background: url('data:image/svg+xml;utf8,<svg width="34" height="22" viewBox="0 0 34 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.69629 8.99984L13.1745 20.4781L32.305 1.34766" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
           no-repeat center / vmob(20) auto,
         $success;
+    }
+  }
+
+  &__note {
+    transition: color 0.2s;
+    position: relative;
+    display: inline-block;
+    width: max-content;
+
+    @media (min-width: 1024px) {
+      &:hover {
+        .code-registration__code-popup {
+          visibility: visible;
+          opacity: 1;
+          transition-delay: 0s;
+        }
+      }
+    }
+  }
+
+  &__code-popup {
+    position: absolute;
+    left: calc(100% + 16px);
+    top: 50%;
+    padding: 16px;
+    background: $text-main;
+    color: #fff;
+    width: 239px;
+    z-index: 2;
+    transform: translate(0, -50%);
+    font-size: 12px;
+    line-height: 150%;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0s 0.3s;
+    border-radius: 4px;
+
+    @include mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: none;
+      width: auto;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 106;
+
+      &.is--visible {
+        visibility: visible;
+        opacity: 1;
+        transition-delay: 0s;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 10px;
+      height: 10px;
+      background: $text-main;
+      transform: translate(6px, -50%) rotate(45deg);
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &-bg {
+      display: none;
+      @include mobile {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    &-inner {
+      @include mobile {
+        padding: vmob(24) vmob(40) vmob(24) vmob(24);
+        background: #fff;
+        color: $text-main;
+        width: vmob(288);
+        font-size: vmob(14);
+        line-height: 150%;
+        position: relative;
+        z-index: 2;
+        border-radius: vmob(4);
+        box-shadow: 0px 4px 24px 0px rgba(67, 72, 78, 0.2);
+      }
+    }
+
+    &-close {
+      display: none;
+
+      @include mobile {
+        display: block;
+        width: vmob(24);
+        height: vmob(24);
+        position: absolute;
+        top: vmob(8);
+        right: vmob(8);
+        background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Navigation/close_small"><path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M7.85357 7.14646L7.50001 6.79291L6.79291 7.50001L7.14646 7.85357L11.2929 12L7.14646 16.1465L6.79291 16.5L7.50001 17.2071L7.85357 16.8536L12 12.7071L16.1465 16.8536L16.5 17.2071L17.2071 16.5L16.8536 16.1465L12.7071 12L16.8536 7.85357L17.2071 7.50001L16.5 6.79291L16.1465 7.14646L12 11.2929L7.85357 7.14646Z" fill="black"/></g></svg>');
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
     }
   }
 }
