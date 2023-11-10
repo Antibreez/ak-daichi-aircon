@@ -1,34 +1,34 @@
 const emailValidation = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
-const $warrantyCodeForm = $('.code-registration__form')
-const $warrantyCode = $warrantyCodeForm.find('#warranty-code')
-const $purchaseDate = $warrantyCodeForm.find('#purchase-date')
-const $warrantyEmail = $warrantyCodeForm.find('#email')
-const $warrantyCity = $warrantyCodeForm.find('#city')
-const $warrantyCodeNote = $warrantyCodeForm.find('.code-registration__note')
-const $warrantyCodeSubmit = $warrantyCodeForm.find('button[type="submit"]')
+// const $warrantyCodeForm = $('.code-registration__form')
+// const $('.code-registration__form #warranty-code') = $warrantyCodeForm.find('#warranty-code')
+// const $('.code-registration__form #purchase-date') = $warrantyCodeForm.find('#purchase-date')
+// const $('.code-registration__form #email') = $warrantyCodeForm.find('#email')
+// const $('.code-registration__form #city') = $warrantyCodeForm.find('#city')
+// const $('.code-registration__form .code-registration__note') = $warrantyCodeForm.find('.code-registration__note')
+// // const $('.code-registration__form button[type="submit"]') = $warrantyCodeForm.find('button[type="submit"]')
 
-const warrantyCodeStage = $warrantyCode.length ? 1 : $warrantyEmail.length ? 2 : 3
+// const warrantyCodeStage = $('.code-registration__form #warranty-code').length ? 1 : $('.code-registration__form #email').length ? 2 : 3
 
 let hasPurchaseDateError = false
 let hasWarrantyCodeError = false
 let hasWarrantyEmailError = false
 let hasWarrantyCityError = false
 
-const warrantyCodeMask = $warrantyCode.attr('placeholder')
-  ? $warrantyCode.attr('placeholder').replace(/_/g, 9)
+const warrantyCodeMask = $('.code-registration__form #warranty-code').attr('placeholder')
+  ? $('.code-registration__form #warranty-code').attr('placeholder').replace(/_/g, 9)
   : '99999-99999-99999'
 
-$warrantyCode.inputmask({
+$('.code-registration__form #warranty-code').inputmask({
   mask: warrantyCodeMask,
   showMaskOnHover: false,
 })
 
 const isPurchaseDateValid = () => {
-  const date = $purchaseDate.val()
+  const date = $('.code-registration__form #purchase-date').val()
 
   return (
-    $purchaseDate
+    $('.code-registration__form #purchase-date')
       .val()
       .split('')
       .filter(w => w === '.').length === 2 &&
@@ -37,15 +37,26 @@ const isPurchaseDateValid = () => {
 }
 
 const isWarrantyCodeValid = () => {
-  if ($warrantyCode.attr('pattern')) {
-    return $warrantyCode.val().trim() && new RegExp($warrantyCode.attr('pattern')).test($warrantyCode.val())
+  if ($('.code-registration__form #warranty-code').attr('pattern')) {
+    return (
+      $('.code-registration__form #warranty-code').val().trim() &&
+      new RegExp($('.code-registration__form #warranty-code').attr('pattern')).test(
+        $('.code-registration__form #warranty-code').val()
+      )
+    )
   }
 
-  return $warrantyCode.val().trim() && !$warrantyCode.val().includes('_')
+  return (
+    $('.code-registration__form #warranty-code').val().trim() &&
+    !$('.code-registration__form #warranty-code').val().includes('_')
+  )
 }
 
 const isWarrantyEmailValid = () => {
-  if ($warrantyEmail.val().trim() && new RegExp(emailValidation).test($warrantyEmail.val())) {
+  if (
+    $('.code-registration__form #email').val().trim() &&
+    new RegExp(emailValidation).test($('.code-registration__form #email').val())
+  ) {
     return true
   }
 
@@ -53,7 +64,7 @@ const isWarrantyEmailValid = () => {
 }
 
 const isWarrantyCityValid = () => {
-  return !!$warrantyCity.val().trim()
+  return !!$('.code-registration__form #city').val().trim()
 }
 
 datepickerMonths = [
@@ -126,61 +137,74 @@ $('#purchase-date').on('click', function () {
 
 function onPurchaseDateSelect() {
   hasPurchaseDateError = false
-  $purchaseDate.parent().removeClass('is--invalid')
+  $('.code-registration__form #purchase-date').parent().removeClass('is--invalid')
 
-  if (!hasWarrantyCodeError && !hasPurchaseDateError) $warrantyCodeSubmit.removeAttr('disabled')
+  if (!hasWarrantyCodeError && !hasPurchaseDateError)
+    $('.code-registration__form button[type="submit"]').removeAttr('disabled')
 }
 
-$warrantyCode.on('input', function (e) {
+$('.code-registration__form #warranty-code').on('input', function (e) {
   hasWarrantyCodeError = false
-  $warrantyCode.parent().removeClass('is--invalid')
+  $('.code-registration__form #warranty-code').parent().removeClass('is--invalid')
 
-  if (!hasWarrantyCodeError && !hasPurchaseDateError) $warrantyCodeSubmit.removeAttr('disabled')
+  if (!hasWarrantyCodeError && !hasPurchaseDateError)
+    $('.code-registration__form button[type="submit"]').removeAttr('disabled')
 })
 
-$purchaseDate.on('input', function (e) {
+$('.code-registration__form #purchase-date').on('input', function (e) {
   hasPurchaseDateError = false
-  $purchaseDate.parent().removeClass('is--invalid')
+  $('.code-registration__form #purchase-date').parent().removeClass('is--invalid')
 
-  if (!hasWarrantyCodeError && !hasPurchaseDateError) $warrantyCodeSubmit.removeAttr('disabled')
+  if (!hasWarrantyCodeError && !hasPurchaseDateError)
+    $('.code-registration__form button[type="submit"]').removeAttr('disabled')
 })
 
-$warrantyEmail.on('input', function () {
+$(document).on('input', '.code-registration__form #email', function () {
   hasWarrantyEmailError = false
-  $warrantyEmail.parent().removeClass('is--invalid')
+  $('.code-registration__form #email').parent().removeClass('is--invalid')
 
-  if (!hasWarrantyEmailError && !hasWarrantyCityError) $warrantyCodeSubmit.removeAttr('disabled')
+  if (!hasWarrantyEmailError && !hasWarrantyCityError)
+    $('.code-registration__form button[type="submit"]').removeAttr('disabled')
 })
 
-$warrantyCity.on('input', function () {
+$(document).on('input', '.code-registration__form #city', function () {
   hasWarrantyCityError = false
-  $warrantyCity.parent().removeClass('is--invalid')
+  $('.code-registration__form #city').parent().removeClass('is--invalid')
 
-  if (!hasWarrantyEmailError && !hasWarrantyCityError) $warrantyCodeSubmit.removeAttr('disabled')
+  if (!hasWarrantyEmailError && !hasWarrantyCityError)
+    $('.code-registration__form button[type="submit"]').removeAttr('disabled')
 })
 
-$warrantyCodeSubmit.on('click', function (e) {
+$(document).on('click', '.code-registration__form button[type="submit"]', function (e) {
   e.preventDefault()
+
+  const warrantyCodeStage = $('.code-registration__form #warranty-code').length
+    ? 1
+    : $('.code-registration__form #email').length
+    ? 2
+    : 3
 
   if (warrantyCodeStage === 1) {
     let valid = true
 
     if (!isWarrantyCodeValid()) {
       hasWarrantyCodeError = true
-      $warrantyCode.parent().addClass('is--invalid')
+      $('.code-registration__form #warranty-code').parent().addClass('is--invalid')
       valid = false
     }
 
     if (!isPurchaseDateValid()) {
       hasPurchaseDateError = true
-      $purchaseDate.parent().addClass('is--invalid')
+      $('.code-registration__form #purchase-date').parent().addClass('is--invalid')
       valid = false
     }
 
+    console.log('valid', valid)
+
     if (valid) {
-      $warrantyCodeForm.find('form').submit()
+      $('.code-registration__form').find('form').submit()
     } else {
-      $warrantyCodeSubmit.attr('disabled', true)
+      $('.code-registration__form button[type="submit"]').attr('disabled', true)
     }
   }
 
@@ -189,29 +213,29 @@ $warrantyCodeSubmit.on('click', function (e) {
 
     if (!isWarrantyEmailValid()) {
       hasWarrantyEmailError = true
-      $warrantyEmail.parent().addClass('is--invalid')
+      $('.code-registration__form #email').parent().addClass('is--invalid')
       valid = false
     }
 
     if (!isWarrantyCityValid()) {
       hasWarrantyCityError = true
-      $warrantyCity.parent().addClass('is--invalid')
+      $('.code-registration__form #city').parent().addClass('is--invalid')
       valid = false
     }
 
     if (valid) {
-      $warrantyCodeForm.find('form').submit()
+      $('.code-registration__form').find('form').submit()
     } else {
-      $warrantyCodeSubmit.attr('disabled', true)
+      $('.code-registration__form button[type="submit"]').attr('disabled', true)
     }
   }
 })
 
-$warrantyCodeNote.on('click', function () {
+$(document).on('click', '.code-registration__form .code-registration__note', function () {
   if (!$(this).hasClass('is--opened')) {
     $(this).addClass('is--opened')
 
-    const $popup = $warrantyCodeNote.find('.code-registration__code-popup').clone()
+    const $popup = $('.code-registration__form .code-registration__note').find('.code-registration__code-popup').clone()
     $popup.addClass('code-registration__code-popup--outer')
 
     $('body').append($popup)
@@ -224,7 +248,7 @@ $warrantyCodeNote.on('click', function () {
 })
 
 const onWarrantyCodePopupClose = () => {
-  $warrantyCodeNote.removeClass('is--opened')
+  $('.code-registration__form .code-registration__note').removeClass('is--opened')
   $('.code-registration__code-popup--outer').remove()
 }
 
