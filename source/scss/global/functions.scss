@@ -9,3 +9,7 @@
 @function vmob($value, $base: 320) {
   @return calc($value / $base * 100vmin);
 }
+
+@function px($value, $base: 1440) {
+  @return calc($value * 2000px / $base);
+}

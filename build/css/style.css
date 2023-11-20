@@ -2968,6 +2968,14 @@ a.ui-button:active,
     right: 6.25vmin;
   }
 }
+@media (min-width: 2000px) {
+  .code-registration__form .input_date::before {
+    top: 59.7222222222px;
+    width: 33.3333333333px;
+    height: 33.3333333333px;
+    right: 27.7777777778px;
+  }
+}
 .code-registration__form .input .input_error {
   display: none;
   font-size: 12px;

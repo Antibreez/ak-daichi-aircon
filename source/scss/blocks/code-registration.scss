@@ -145,6 +145,13 @@
           right: vmob(20);
         }
 
+        @include desktop-xxl {
+          top: px(43);
+          width: px(24);
+          height: px(24);
+          right: px(20);
+        }
+
         // @include tablet {
         //   top: vtab(43);
         //   right: vtab(20);
